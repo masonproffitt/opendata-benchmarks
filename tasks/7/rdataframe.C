@@ -31,7 +31,7 @@ void rdataframe() {
     auto h = df.Filter("nJet >= 1")
                .Define("goodJet_antiMuon", good_jets, {"Jet_eta", "Jet_phi", "Muon_pt", "Muon_eta", "Muon_phi"})
                .Define("goodJet_antiElectron", good_jets, {"Jet_eta", "Jet_phi", "Electron_pt", "Electron_eta", "Electron_phi"})
-               .Define("goodJet", "goodJet_antiMuon || goodJet_antiElectron")
+               .Define("goodJet", "Jet_pt > 30 && goodJet_antiMuon && goodJet_antiElectron")
                .Filter("Sum(goodJet) > 0")
                .Define("goodJet_sumPt", "Sum(Jet_pt[goodJet])")
                .Histo1D({"", ";Jet p_{T} sum (GeV);N_{Events}", 100, 15, 200}, "goodJet_sumPt");
