@@ -14,7 +14,7 @@ ROOT::RVec<float> compute_dimuon_masses(const ROOT::RVec<float> &pt,
         dimuon_masses.push_back((v1 + v2).mass());
     }
     return dimuon_masses;
-};
+}
 
 
 void rdataframe() {
