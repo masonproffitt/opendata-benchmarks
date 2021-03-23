@@ -1,7 +1,8 @@
-template <typename T> using Vec = const ROOT::RVec<T>&;
-
-ROOT::RVec<int> good_jets(Vec<float> eta1, Vec<float> phi1, Vec<float> pt2, Vec<float> eta2, Vec<float> phi2)
-{
+ROOT::RVec<int> good_jets(const ROOT::RVec<float> &eta1,
+                          const ROOT::RVec<float> &phi1,
+                          const ROOT::RVec<float> &pt2,
+                          const ROOT::RVec<float> &eta2,
+                          const ROOT::RVec<float> &phi2) {
     ROOT::RVec<int> mask(eta1.size(), 1);
     if (eta2.size() == 0) {
         return mask;
@@ -27,7 +28,7 @@ ROOT::RVec<int> good_jets(Vec<float> eta1, Vec<float> phi1, Vec<float> pt2, Vec<
 void rdataframe() {
     ROOT::EnableImplicitMT();
     ROOT::RDataFrame df("Events", "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root");
-    auto h = df.Filter("nJet > 0", "At least one jet")
+    auto h = df.Filter("nJet >= 1")
                .Define("goodJet_antiMuon", good_jets, {"Jet_eta", "Jet_phi", "Muon_pt", "Muon_eta", "Muon_phi"})
                .Define("goodJet_antiElectron", good_jets, {"Jet_eta", "Jet_phi", "Electron_pt", "Electron_eta", "Electron_phi"})
                .Define("goodJet", "goodJet_antiMuon || goodJet_antiElectron")
