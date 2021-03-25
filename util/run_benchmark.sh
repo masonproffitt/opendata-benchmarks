@@ -11,7 +11,7 @@ fi
 
 if [ "$n" -lt 1 ] || [ -z "$1" ]
 then
-	echo "usage: bash $0 [-n <number of trials>] <benchmark number> [input file] [multithreading]"
+	echo "usage: $0 [-n <number of trials>] <benchmark number> [input file] [multithreading]"
 	exit 1
 fi
 
