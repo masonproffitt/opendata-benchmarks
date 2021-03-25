@@ -20,9 +20,11 @@ ROOT::RVec<int> get_jet_lepton_isolation(const ROOT::RVec<float> &jet_eta,
 }
 
 
-void rdataframe() {
-    ROOT::EnableImplicitMT();
-    ROOT::RDataFrame df("Events", "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root");
+void benchmark7(const std::string input = "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root",
+                const bool multithreading = true) {
+    if (multithreading) ROOT::EnableImplicitMT();
+
+    ROOT::RDataFrame df("Events", input);
     auto h = df.Define("Lepton_pt", "Concatenate(Electron_pt, Muon_pt)")
                .Define("Lepton_eta", "Concatenate(Electron_eta, Muon_eta)")
                .Define("Lepton_phi", "Concatenate(Electron_phi, Muon_phi)")
@@ -39,5 +41,5 @@ void rdataframe() {
 
     TCanvas c;
     h->Draw();
-    c.SaveAs("7_rdataframe.png");
+    c.SaveAs("benchmark7.png");
 }

@@ -21,9 +21,11 @@ ROOT::RVec<float> get_mass(const ROOT::RVec<ROOT::Math::PtEtaPhiMVector> &p4) {
     return ROOT::VecOps::Map(p4, [](const ROOT::Math::PtEtaPhiMVector &p4){ return p4.mass(); });
 }
 
-void rdataframe() {
-    ROOT::EnableImplicitMT();
-    ROOT::RDataFrame df("Events", "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root");
+void benchmark6(const std::string input = "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root",
+                const bool multithreading = true) {
+    if (multithreading) ROOT::EnableImplicitMT();
+
+    ROOT::RDataFrame df("Events", input);
     auto df2 = df.Filter("nJet >= 3")
                  .Define("Jet_p4", make_p4, {"Jet_pt", "Jet_eta", "Jet_phi", "Jet_mass"})
                  .Define("Trijet_indices", "Combinations(Jet_p4, 3)")
@@ -41,5 +43,5 @@ void rdataframe() {
     h1->Draw();
     c.cd(2);
     h2->Draw();
-    c.SaveAs("6_rdataframe.png");
+    c.SaveAs("benchmark6.png");
 }

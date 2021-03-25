@@ -31,9 +31,11 @@ ROOT::RVec<float> get_dilepton_mass(const ROOT::RVec<ROOT::Math::PtEtaPhiMVector
     return dilepton_mass;
 }
 
-void rdataframe() {
-    ROOT::EnableImplicitMT();
-    ROOT::RDataFrame df("Events", "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root");
+void benchmark8(const std::string input = "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root",
+                const bool multithreading = true) {
+    if (multithreading) ROOT::EnableImplicitMT();
+
+    ROOT::RDataFrame df("Events", input);
     auto h = df.Filter("nElectron + nMuon >= 3")
                .Define("Lepton_flavor", "Concatenate(ROOT::RVec<int>(nElectron, 0), ROOT::RVec<int>(nMuon, 1))")
                .Define("Lepton_charge", "Concatenate(Electron_charge, Muon_charge)")
@@ -54,5 +56,5 @@ void rdataframe() {
 
     TCanvas c;
     h->Draw();
-    c.SaveAs("8_rdataframe.png");
+    c.SaveAs("benchmark8.png");
 }
