@@ -7,7 +7,7 @@ then
 fi
 
 macro_name="benchmark$1"
-macro_path="$(dirname $0)/$macro_name.C"
+macro_path="$(dirname $0)/../macros/$macro_name.C"
 
 if [ $# -lt 2 ]
 then
