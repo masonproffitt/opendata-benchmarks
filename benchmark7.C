@@ -32,9 +32,9 @@ void benchmark7(const std::string input = "root://eospublic.cern.ch//eos/root-eo
                .Define("goodLepton_eta", "Lepton_eta[goodLepton]")
                .Define("goodLepton_phi", "Lepton_phi[goodLepton]")
                .Define("goodJet", "Jet_pt > 30")
-               .Define("goodJet_pt", "Jet_eta[goodJet]")
+               .Define("goodJet_pt", "Jet_pt[goodJet]")
                .Define("goodJet_eta", "Jet_eta[goodJet]")
-               .Define("goodJet_phi", "Jet_eta[goodJet]")
+               .Define("goodJet_phi", "Jet_phi[goodJet]")
                .Define("goodJet_leptonIsolation", get_jet_lepton_isolation, {"goodJet_eta", "goodJet_phi", "goodLepton_eta", "goodLepton_phi"})
                .Define("goodIsolatedJet_sumPt", "Sum(goodJet_pt[goodJet_leptonIsolation])")
                .Histo1D({"", ";Jet p_{T} sum (GeV);N_{Events}", 100, 15, 200}, "goodIsolatedJet_sumPt");
