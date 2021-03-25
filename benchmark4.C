@@ -8,5 +8,5 @@ void benchmark4(const std::string input = "root://eospublic.cern.ch//eos/root-eo
 
     TCanvas c;
     h->Draw();
-    c.SaveAs("benchmark4.png");
+    c.SaveAs("benchmark4.root");
 }

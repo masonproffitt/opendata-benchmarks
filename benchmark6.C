@@ -43,5 +43,5 @@ void benchmark6(const std::string input = "root://eospublic.cern.ch//eos/root-eo
     h1->Draw();
     c.cd(2);
     h2->Draw();
-    c.SaveAs("benchmark6.png");
+    c.SaveAs("benchmark6.root");
 }
