@@ -1,8 +1,17 @@
 #!/bin/bash
 
-if [ -z "$1" ]
+if [ "$1" == "-n" ]
 then
-	echo "usage: bash $0 <benchmark number> [input file] [multithreading]"
+	n="$2"
+        n=$((n+0))
+	shift 2
+else
+	n=1
+fi
+
+if [ "$n" -lt 1 ] || [ -z "$1" ]
+then
+	echo "usage: bash $0 [-n <number of trials>] <benchmark number> [input file] [multithreading]"
 	exit 1
 fi
 
@@ -22,11 +31,13 @@ fi
 root -b -l <<EOF
 try {
 	.L $macro_path
-	auto start = std::chrono::steady_clock::now();
-	$macro_call;
-	auto stop = std::chrono::steady_clock::now();
-	std::chrono::duration<double> interval = stop - start;
-	std::cout << interval.count() << " s" << std::endl;
+	for (auto i = 0; i < $n; ++i) {
+		auto start = std::chrono::steady_clock::now();
+		$macro_call;
+		auto stop = std::chrono::steady_clock::now();
+		std::chrono::duration<double> interval = stop - start;
+		std::cout << interval.count() << " s" << std::endl;
+	}
 } catch (...) {
 	exit(1);
 }
