@@ -50,9 +50,8 @@ void benchmark8(const std::string input = "root://eospublic.cern.ch//eos/root-eo
                .Define("Best_dilepton_idx", "ArgMin(abs(Dilepton_mass - 91.2))")
                .Define("LeadingLepton_indices", "Reverse(Argsort(Lepton_pt))")
                .Define("LeadingOtherLepton_idx", "LeadingLepton_indices[LeadingLepton_indices != Dilepton_indices[0][Best_dilepton_idx] && LeadingLepton_indices != Dilepton_indices[1][Best_dilepton_idx]][0]")
-               .Define("LeadingOtherLepton_p4", "Lepton_p4[LeadingOtherLepton_idx]")
-               .Define("METPlusLeadingOtherLepton_mt", "(ROOT::Math::PtEtaPhiMVector(MET_pt, 0, MET_phi, 0) + LeadingOtherLepton_p4).mt()")
-               .Histo1D({"", ";m_{T} (GeV);N_{Events}", 100, 15, 250}, "METPlusLeadingOtherLepton_mt");
+               .Define("METAndLeadingOtherLepton_mt", "sqrt(2 * Lepton_pt[LeadingOtherLepton_idx] * MET_pt * (1 - cos(ROOT::VecOps::DeltaPhi(Lepton_phi[LeadingOtherLepton_idx], MET_phi))))")
+               .Histo1D({"", ";m_{T} (GeV);N_{Events}", 100, 15, 250}, "METAndLeadingOtherLepton_mt");
 
     TCanvas c;
     h->Draw();
