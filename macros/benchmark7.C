@@ -11,7 +11,7 @@ ROOT::RVec<int> get_jet_lepton_isolation(const ROOT::RVec<float> &jet_eta,
     for (auto i = 0; i < jet_lepton_indices[0].size(); ++i) {
         const auto jet_idx = jet_lepton_indices[0][i];
         const auto lepton_idx = jet_lepton_indices[1][i];
-        const auto deltaR = ROOT::VecOps::DeltaR(jet_eta[jet_idx], jet_phi[jet_idx], lepton_eta[lepton_idx], lepton_phi[lepton_idx]);
+        const auto deltaR = ROOT::VecOps::DeltaR(jet_eta[jet_idx], lepton_eta[lepton_idx], jet_phi[jet_idx], lepton_phi[lepton_idx]);
         if (deltaR < 0.4) {
             jet_mask[jet_idx] = 0;
         }
