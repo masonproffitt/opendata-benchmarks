@@ -30,7 +30,7 @@ fi
 
 root -b -l <<EOF
 try {
-	.L $macro_path
+	.L $macro_path+O
 	for (auto i = 0; i < $n; ++i) {
 		auto start = std::chrono::steady_clock::now();
 		$macro_call;
