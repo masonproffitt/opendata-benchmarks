@@ -28,9 +28,11 @@ else
 	macro_call="$macro_name(\"$2\", $3)"
 fi
 
-root -b -l <<EOF
+root -b -l \
+    -e ".L /opt/root/lib/libROOTDataFrame.so" \
+    -e ".L $macro_path+O" \
+<<EOF
 try {
-	.L $macro_path+O
 	for (auto i = 0; i < $n; ++i) {
 		auto start = std::chrono::steady_clock::now();
 		$macro_call;

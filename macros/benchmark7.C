@@ -1,3 +1,7 @@
+#include "ROOT/RDataFrame.hxx"
+#include "ROOT/RVec.hxx"
+#include "TCanvas.h"
+
 ROOT::RVec<int> get_jet_lepton_isolation(const ROOT::RVec<float> &jet_eta,
                                          const ROOT::RVec<float> &jet_phi,
                                          const ROOT::RVec<float> &lepton_eta,

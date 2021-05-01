@@ -1,3 +1,8 @@
+#include "Math/Vector4D.h"
+#include "ROOT/RDataFrame.hxx"
+#include "ROOT/RVec.hxx"
+#include "TCanvas.h"
+
 ROOT::RVec<ROOT::RVec<std::size_t> > get_dilepton_indices(const ROOT::RVec<int> &flavor,
                                                           const ROOT::RVec<int> &charge) {
     ROOT::RVec<ROOT::RVec<std::size_t> > dilepton_indices(2);
