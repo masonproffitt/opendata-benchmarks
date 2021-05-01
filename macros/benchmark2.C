@@ -1,3 +1,6 @@
+#include "ROOT/RDataFrame.hxx"
+#include "TCanvas.h"
+
 void benchmark2(const std::string input = "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root",
                 const bool multithreading = true) {
     if (multithreading) ROOT::EnableImplicitMT();

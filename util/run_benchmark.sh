@@ -11,7 +11,7 @@ fi
 
 if [ "$n" -lt 1 ] || [ -z "$1" ]
 then
-	echo "usage: $0 [-n <number of trials>] <benchmark number> [input file] [multithreading]"
+	echo "usage: $0 [-n <number of trials>] <benchmark number> [input file] [multithreading] [optimizations]"
 	exit 1
 fi
 
@@ -28,9 +28,17 @@ else
 	macro_call="$macro_name(\"$2\", $3)"
 fi
 
-root -b -l <<EOF
+root_options=('-b' '-l')
+
+if [ -z "$4" ] || [ "$4" == "true" ]
+then
+	root_options+=('-e' '.L /opt/root/lib/libROOTDataFrame.so' '-e' ".L $macro_path+O")
+else
+	root_options+=('-e' ".L $macro_path")
+fi
+
+root "${root_options[@]}" <<EOF
 try {
-	.L $macro_path
 	for (auto i = 0; i < $n; ++i) {
 		auto start = std::chrono::steady_clock::now();
 		$macro_call;

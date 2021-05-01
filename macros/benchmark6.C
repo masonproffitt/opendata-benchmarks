@@ -1,3 +1,8 @@
+#include "Math/Vector4D.h"
+#include "ROOT/RDataFrame.hxx"
+#include "ROOT/RVec.hxx"
+#include "TCanvas.h"
+
 ROOT::RVec<ROOT::Math::PtEtaPhiMVector> make_p4(const ROOT::RVec<float> &pt,
                                                 const ROOT::RVec<float> &eta,
                                                 const ROOT::RVec<float> &phi,
