@@ -1,4 +1,4 @@
-FROM rootproject/root:6.22.08-ubuntu20.04
+FROM rootproject/root:6.24.00-ubuntu20.04
 COPY macros /root/macros/
 COPY util /root/util/
 WORKDIR /root/util
