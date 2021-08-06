@@ -36,7 +36,7 @@ ROOT::RVec<float> get_dilepton_mass(const ROOT::RVec<ROOT::Math::PtEtaPhiMVector
     return dilepton_mass;
 }
 
-void benchmark8(const std::string input = "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root",
+void benchmark8(const std::vector<std::string> input = {"root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root"},
                 const bool multithreading = true) {
     if (multithreading) ROOT::EnableImplicitMT();
 
