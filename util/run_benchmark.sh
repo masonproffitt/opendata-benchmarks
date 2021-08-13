@@ -37,17 +37,17 @@ do
         shift # past value
         ;;
       -b|--benchmark-id)
-        BENCHMARK_ID="$2"
+        BENCHMARK_ID="$(read_value "$@")" || exit 1
         shift # past argument
         shift # past value
         ;;
       -m|--enable-multithreading)
-        ENABLE_MULTITHREADING="$2"
+        ENABLE_MULTITHREADING="$(read_value "$@")" || exit 1
         shift # past argument
         shift # past value
         ;;
       -o|--enable-optimizations)
-        ENABLE_OPTIMIZATIONS="$2"
+        ENABLE_OPTIMIZATIONS="$(read_value "$@")" || exit 1
         shift # past argument
         shift # past value
         ;;
@@ -61,6 +61,13 @@ do
         ;;
     esac
 done
+
+if [ -z "$BENCHMARK_ID" ]
+then
+	echo "Benchmark ID must be specified." >&2
+	print_usage >&2
+	exit 1
+fi
 
 if $VERBOSE
 then
