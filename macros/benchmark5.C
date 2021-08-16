@@ -24,7 +24,7 @@ ROOT::RVec<float> get_dimuon_mass(const ROOT::RVec<ROOT::Math::PtEtaPhiMVector> 
     return dimuon_mass;
 }
 
-void benchmark5(const std::string input = "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root",
+void benchmark5(const std::vector<std::string> input = {"root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root"},
                 const bool multithreading = true) {
     if (multithreading) ROOT::EnableImplicitMT();
 

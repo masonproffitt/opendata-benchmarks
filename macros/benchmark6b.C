@@ -26,7 +26,7 @@ ROOT::RVec<float> get_mass(const ROOT::RVec<ROOT::Math::PtEtaPhiMVector> &p4) {
     return ROOT::VecOps::Map(p4, [](const ROOT::Math::PtEtaPhiMVector &p4){ return p4.mass(); });
 }
 
-void benchmark6b(const std::string input = "root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root",
+void benchmark6b(const std::vector<std::string> input = {"root://eospublic.cern.ch//eos/root-eos/benchmark/Run2012B_SingleMu.root"},
                 const bool multithreading = true) {
     if (multithreading) ROOT::EnableImplicitMT();
 
